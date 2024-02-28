@@ -4,6 +4,9 @@ go to .config and git clone :
 
 Make sure nodejs and npm are installed:
 on Linux :
+
 `sudo apt install nodejs npm`
+
 Also make sure that mason can build the python packages
+
 `sudo apt install python3.10-venv`
