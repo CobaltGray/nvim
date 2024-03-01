@@ -10,3 +10,7 @@ on Linux :
 Also make sure that mason can build the python packages
 
 `sudo apt install python3.10-venv`
+
+For Go language parsing :
+
+`go install golang.org/x/tools/gopls@latest`
