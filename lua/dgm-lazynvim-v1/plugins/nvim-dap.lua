@@ -1,5 +1,6 @@
 return {
   "mfussenegger/nvim-dap",
+  lazy = true,
 
   dependencies = {
 
@@ -72,7 +73,6 @@ return {
   },
 
   config = function()
-    print("loading dap-projects...")
     require("nvim-dap-projects").search_project_config()
     vim.fn.sign_define('DapBreakpoint',{ text ='🧘', texthl ='', linehl ='', numhl =''})
     vim.fn.sign_define('DapStopped',{ text ='🏃', texthl ='', linehl ='', numhl =''})
@@ -87,13 +87,6 @@ return {
         args = {'dap', '-l', '127.0.0.1:${port}'},
       }
     }
-
-    -- local dap = require('dap')
-    -- dap.adapters.dlv = {
-    --     type = "executable",
-    --     command = "/usr/local/bin/dlv",
-    --     name = "dlv"
-    -- }
 
 
     -- create a file called .nvim-day.lua in your project directory with the followin information

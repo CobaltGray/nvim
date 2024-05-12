@@ -91,34 +91,6 @@ return {
         },
     }
 
-    -- configure rust server 
-    -- lspconfig["rust_analyzer"].setup({
-    --     capabilities = capabilities,
-    --     on_attach = on_attach,
-    -- })
-
-    -- lspconfig.rust_analyzer.setup({
-    --     on_attach = on_attach,
-    --     settings = {
-    --         ["rust_analyzer"] = {
-    --             imports = {
-    --                 granualarity = {
-    --                     group = "module",
-    --                 },
-    --                 prefix = "self",
-    --             },
-    --             cargo = {
-    --                 buildScripts = {
-    --                     enable = true,
-    --                 },
-    --             },
-    --             procMacro = {
-    --                 enable = true
-    --             },
-    --         },
-    --     },
-    -- })
-
     -- configure html server
     lspconfig["html"].setup({
       capabilities = capabilities,
@@ -136,6 +108,26 @@ return {
     lspconfig["pyright"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
+    })
+
+    -- configure c/c++ server
+    local format_sync_grp = vim.api.nvim_create_augroup("Clang Format", {})
+    lspconfig["clangd"].setup({
+        on_attach = function(client, bufnr)
+            client.server_capabilities.signatureHelpProvider = false
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                group = format_sync_grp,
+                buffer = bufnr,
+                callback = function()
+                    vim.lsp.buf.format({ bufnr = bufnr })
+                end,
+            })
+            on_attach(client, bufnr)
+        end,
+        filetypes = {"c", "cpp", "objc", "objcpp", "cuda", "proto" },
+        capabilities = capabilities,
+
+        keymap.set( "n", "<leader>fm", "<cmd>%!clang-format<cr>",{desc="clang format"}),
     })
 
     -- configure lua server (with special settings)

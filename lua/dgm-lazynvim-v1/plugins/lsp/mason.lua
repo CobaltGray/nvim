@@ -33,6 +33,7 @@ return {
                     'jsonls',
                     'yamlls',
                     'rust_analyzer',
+                    'clangd',
                 },
             })
         end,
@@ -54,6 +55,8 @@ return {
                     "pylint", -- python linter
                     "eslint_d", -- js linter
                     "golangci-lint", -- go linter
+                    "cpplint", -- cpp linter
+                    'clang-format',
                 },
             })
         end,
