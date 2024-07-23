@@ -108,6 +108,9 @@ return {
     lspconfig["pyright"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
+      root_dir = function()
+        return vim.fn.getcwd()
+      end,
     })
 
     -- configure c/c++ server
