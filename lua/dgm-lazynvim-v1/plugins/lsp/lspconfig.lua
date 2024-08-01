@@ -91,48 +91,6 @@ return {
         },
     }
 
-    -- configure html server
-    lspconfig["html"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-    -- configure graphql language server
-    lspconfig["graphql"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-    })
-
-    -- configure python server
-    lspconfig["pyright"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      root_dir = function()
-        return vim.fn.getcwd()
-      end,
-    })
-
-    -- configure c/c++ server
-    local format_sync_grp = vim.api.nvim_create_augroup("Clang Format", {})
-    lspconfig["clangd"].setup({
-        on_attach = function(client, bufnr)
-            client.server_capabilities.signatureHelpProvider = false
-            vim.api.nvim_create_autocmd("BufWritePre", {
-                group = format_sync_grp,
-                buffer = bufnr,
-                callback = function()
-                    vim.lsp.buf.format({ bufnr = bufnr })
-                end,
-            })
-            on_attach(client, bufnr)
-        end,
-        filetypes = {"c", "cpp", "objc", "objcpp", "cuda", "proto" },
-        capabilities = capabilities,
-
-        keymap.set( "n", "<leader>fm", "<cmd>%!clang-format<cr>",{desc="clang format"}),
-    })
-
     -- configure lua server (with special settings)
     lspconfig["lua_ls"].setup({
       capabilities = capabilities,

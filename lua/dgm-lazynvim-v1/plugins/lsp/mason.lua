@@ -28,12 +28,9 @@ return {
             mason_lspconfig.setup({
                 ensure_installed = {
                     'gopls',
-                    'pyright',
                     'lua_ls',
                     'jsonls',
                     'yamlls',
-                    'rust_analyzer',
-                    'clangd',
                 },
             })
         end,
@@ -49,14 +46,7 @@ return {
                 ensure_installed = {
                     "prettier", -- prettier formatter
                     "stylua", -- lua formatter
-                    "isort", -- python formatter
-                    "black", -- python formatter
-                    "debugpy", -- python debugger
-                    "pylint", -- python linter
-                    "eslint_d", -- js linter
                     "golangci-lint", -- go linter
-                    "cpplint", -- cpp linter
-                    'clang-format',
                 },
             })
         end,

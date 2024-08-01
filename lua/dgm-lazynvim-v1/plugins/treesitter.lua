@@ -24,18 +24,12 @@ return {
         },
         -- ensure these language parsers are installed
         ensure_installed = {
-          "c",
-          "cpp",
           "json",
-          "markdown",
-          "markdown_inline",
           "bash",
           "lua",
           "vim",
           "dockerfile",
           "gitignore",
-          "python",
-          "rust",
           "go",
           "gomod",
           "gowork",
